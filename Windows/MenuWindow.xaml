@@ -1,0 +1,29 @@
+﻿<Window x:Class="MaistrovaControl10.Windows.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaistrovaControl10.Windows"
+        mc:Ignorable="d"
+        Title="MenuWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="/Resource/333.jpg" Grid.Column="1" Stretch="Fill"/>
+
+        <Image Source="/Resource/111.jpg" VerticalAlignment="Top" />
+        
+        <StackPanel VerticalAlignment="Bottom" Margin="0 0 0 50">
+            <Button Content="Добавить вагон" Margin="10" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF00B544" FontSize="14" Click="Button_Click"/>
+            <Button Content="Добавить работу" Margin="10" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF00B544" FontSize="14" Click="Button_Click_1"/>
+            <Button Content="Учет" Margin="10" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF00B544" FontSize="14" Click="Button_Click_2"/>
+            <Button Content="Журнал" Margin="10" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF00B544" FontSize="14" Click="Button_Click_3"/>
+        </StackPanel>
+        <Frame x:Name="FrameBodyMain"
+               NavigationUIVisibility="Hidden"
+               Grid.Column="1"/>
+    </Grid>
+</Window>

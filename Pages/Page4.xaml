@@ -1,0 +1,31 @@
+﻿<Page x:Class="MaistrovaControl10.Pages.Page4"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MaistrovaControl10.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="500"
+      Title="Page4">
+
+    <Grid>
+        <DataGrid x:Name="DateGr2" AutoGenerateColumns="False" HorizontalAlignment="Center"
+              Height="230" Width="500" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата начала" Width="80" Binding="{Binding DateStart, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                <DataGridTextColumn Header="Дата конца" Width="80" Binding="{Binding DateEnd, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                <DataGridTextColumn Header="Название работы" Width="110" Binding="{Binding WorkTable.TitleWork}"/>
+                <DataGridTextColumn Header="Вид работы" Width="80" Binding="{Binding WorkTable.TypeWorkTable.TitleTypeWork}"/>
+                <DataGridTextColumn Header="Номер вагона" Width="90" Binding="{Binding TrolleyTable.PersonalNumberTrolley}"/>
+                <DataGridTextColumn Header="Этажность вагона" Width="120" Binding="{Binding TrolleyTable.FloorsTable.TitleFloors}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Margin="20 220 0 50" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBlock Text="Начало работы" FontSize="20" Foreground="#FF00A000" FontWeight="Bold"/>
+            <DatePicker Name="DateStartDP" Height="30" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <TextBlock Text="Конец работы" FontSize="20" Foreground="#FF00A000" FontWeight="Bold"/>
+            <DatePicker Name="DateEndDP" Height="30" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        </StackPanel>
+        <Button Name="SweepButton" Click="SweepButton_Click" Content="Найти" Margin="20" FontSize="15" FontWeight="Bold" Foreground="#FF00A000" Width="100" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+    </Grid>
+</Page>

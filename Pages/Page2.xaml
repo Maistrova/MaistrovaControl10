@@ -1,0 +1,53 @@
+﻿<Page x:Class="MaistrovaControl10.Pages.Page2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MaistrovaControl10.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="600">
+    <ScrollViewer>
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 10 0 0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 5">
+                <TextBlock 
+                    Text="Название работы" 
+                    Margin="10 0 0 0"
+                    FontSize="20"       
+                    Foreground="#FF00A000"
+                    FontWeight="Bold"/>
+                <TextBox
+                    MaxLength="49"
+                    Name="TBNameRab"
+                    Height="40" 
+                    Width="250"
+                    BorderBrush="#FF00FF3B"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 5 0 5">
+                <TextBlock 
+                    Text="Вид работы" 
+                    Margin="10 0 0 0" 
+                    FontSize="20"
+                    Foreground="#FF00A000" 
+                    FontWeight="Bold"/>
+                <ComboBox
+                    Height="40" 
+                    Width="250"
+                    BorderBrush="#FF0CFF00" 
+                    Name="VidRabCB" 
+                    DisplayMemberPath="TitleTypeWork"
+                    SelectedValuePath="PersonalNumberTypeWork"/>
+                </StackPanel>
+            <Button 
+                Content="Создать"
+                Margin="20"
+                Height="40" 
+                Width="100"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#FF00A000" 
+                Click="Button_Click"/>
+            </StackPanel>
+    </Grid>
+</ScrollViewer>
+</Page>

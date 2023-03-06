@@ -1,0 +1,28 @@
+﻿<Page x:Class="MaistrovaControl10.Pages.Page3"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MaistrovaControl10.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="Page3">
+
+
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Название работы" Margin="180 0 0 0" FontSize="20" Foreground="#FF00A000" FontWeight="Bold"/>
+            <ComboBox SelectedValuePath="PersonalNumberWork" Height="30" Width="250" BorderBrush="#FF00FF3B" Name="NameRabCB" DisplayMemberPath="TitleWork"/>
+            <TextBlock Text="Начало работы" Margin="180 0 0 0" FontSize="20" Foreground="#FF00A000" FontWeight="Bold"/>
+            <DatePicker Name="NachaloDP" Height="40" Width="250"/>
+            <TextBlock Text="Конец работы" Margin="180 0 0 0" FontSize="20" Foreground="#FF00A000" FontWeight="Bold"/>
+            <DatePicker Name="KonecDP" Height="40" Width="250"/>
+            <TextBlock Text="Номер вагона" Margin="180 0 0 0" FontSize="20" Foreground="#FF00A000" FontWeight="Bold"/>
+            <ComboBox SelectedValuePath="PersonalNumberTrolley" Height="30" Width="250" BorderBrush="#FF00FF3B" Name="NomerVagCB" DisplayMemberPath="PersonalNumberTrolley"/>
+            <TextBlock Text="Статус работы" Margin="180 0 0 0" FontSize="20" Foreground="#FF00A000" FontWeight="Bold"/>
+            <ComboBox SelectedValuePath="PersonalNumberStatusWork" Height="30" Width="250" BorderBrush="#FF00FF3B" Name="StatusComboBox" DisplayMemberPath="TitleStatusWork"/>
+
+            <Button Content="СОХРАНИТЬ" Margin="10" Height="35" Width="120" FontSize="15" FontWeight="Bold" Foreground="#FF00A000" x:Name="SaveButton" Click="SaveButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище DepoMaistrovaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FloorsTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberFloors" />
+          </Key>
+          <Property Name="PersonalNumberFloors" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleFloors" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportTable">
+          <Key>
+            <PropertyRef Name="IdReport" />
+          </Key>
+          <Property Name="IdReport" Type="int" Nullable="false" />
+          <Property Name="IdWork" Type="int" Nullable="false" />
+          <Property Name="IdTrolly" Type="int" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="DateStart" Type="date" Nullable="false" />
+          <Property Name="DateEnd" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusWorkTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberStatusWork" />
+          </Key>
+          <Property Name="PersonalNumberStatusWork" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleStatusWork" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TrolleyTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberTrolley" />
+          </Key>
+          <Property Name="PersonalNumberTrolley" Type="int" Nullable="false" />
+          <Property Name="FloorsTrolley" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeWorkTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberTypeWork" />
+          </Key>
+          <Property Name="PersonalNumberTypeWork" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleTypeWork" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WorkTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberWork" />
+          </Key>
+          <Property Name="PersonalNumberWork" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeWork" Type="int" Nullable="false" />
+          <Property Name="TitleWork" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ReportTable_StatusWorkTable">
+          <End Role="StatusWorkTable" Type="Self.StatusWorkTable" Multiplicity="1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusWorkTable">
+              <PropertyRef Name="PersonalNumberStatusWork" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_TrolleyTable">
+          <End Role="TrolleyTable" Type="Self.TrolleyTable" Multiplicity="1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrolleyTable">
+              <PropertyRef Name="PersonalNumberTrolley" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="IdTrolly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_WorkTable">
+          <End Role="WorkTable" Type="Self.WorkTable" Multiplicity="1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTable">
+              <PropertyRef Name="PersonalNumberWork" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="IdWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrolleyTable_FloorsTable">
+          <End Role="FloorsTable" Type="Self.FloorsTable" Multiplicity="1" />
+          <End Role="TrolleyTable" Type="Self.TrolleyTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorsTable">
+              <PropertyRef Name="PersonalNumberFloors" />
+            </Principal>
+            <Dependent Role="TrolleyTable">
+              <PropertyRef Name="FloorsTrolley" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTable_TypeWorkTable1">
+          <End Role="TypeWorkTable" Type="Self.TypeWorkTable" Multiplicity="1" />
+          <End Role="WorkTable" Type="Self.WorkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeWorkTable">
+              <PropertyRef Name="PersonalNumberTypeWork" />
+            </Principal>
+            <Dependent Role="WorkTable">
+              <PropertyRef Name="TypeWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DepoMaistrovaModelContainer">
+          <EntitySet Name="FloorsTable" EntityType="Self.FloorsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportTable" EntityType="Self.ReportTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusWorkTable" EntityType="Self.StatusWorkTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrolleyTable" EntityType="Self.TrolleyTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeWorkTable" EntityType="Self.TypeWorkTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkTable" EntityType="Self.WorkTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ReportTable_StatusWorkTable" Association="Self.FK_ReportTable_StatusWorkTable">
+            <End Role="StatusWorkTable" EntitySet="StatusWorkTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_TrolleyTable" Association="Self.FK_ReportTable_TrolleyTable">
+            <End Role="TrolleyTable" EntitySet="TrolleyTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_WorkTable" Association="Self.FK_ReportTable_WorkTable">
+            <End Role="WorkTable" EntitySet="WorkTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrolleyTable_FloorsTable" Association="Self.FK_TrolleyTable_FloorsTable">
+            <End Role="FloorsTable" EntitySet="FloorsTable" />
+            <End Role="TrolleyTable" EntitySet="TrolleyTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTable_TypeWorkTable1" Association="Self.FK_WorkTable_TypeWorkTable1">
+            <End Role="TypeWorkTable" EntitySet="TypeWorkTable" />
+            <End Role="WorkTable" EntitySet="WorkTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DepoMaistrovaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DepoMaistrovaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FloorsTable" EntityType="DepoMaistrovaModel.FloorsTable" />
+          <EntitySet Name="ReportTable" EntityType="DepoMaistrovaModel.ReportTable" />
+          <EntitySet Name="StatusWorkTable" EntityType="DepoMaistrovaModel.StatusWorkTable" />
+          <EntitySet Name="sysdiagrams" EntityType="DepoMaistrovaModel.sysdiagrams" />
+          <EntitySet Name="TrolleyTable" EntityType="DepoMaistrovaModel.TrolleyTable" />
+          <EntitySet Name="TypeWorkTable" EntityType="DepoMaistrovaModel.TypeWorkTable" />
+          <EntitySet Name="WorkTable" EntityType="DepoMaistrovaModel.WorkTable" />
+          <AssociationSet Name="FK_TrolleyTable_FloorsTable" Association="DepoMaistrovaModel.FK_TrolleyTable_FloorsTable">
+            <End Role="FloorsTable" EntitySet="FloorsTable" />
+            <End Role="TrolleyTable" EntitySet="TrolleyTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_StatusWorkTable" Association="DepoMaistrovaModel.FK_ReportTable_StatusWorkTable">
+            <End Role="StatusWorkTable" EntitySet="StatusWorkTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_TrolleyTable" Association="DepoMaistrovaModel.FK_ReportTable_TrolleyTable">
+            <End Role="TrolleyTable" EntitySet="TrolleyTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_WorkTable" Association="DepoMaistrovaModel.FK_ReportTable_WorkTable">
+            <End Role="WorkTable" EntitySet="WorkTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTable_TypeWorkTable1" Association="DepoMaistrovaModel.FK_WorkTable_TypeWorkTable1">
+            <End Role="TypeWorkTable" EntitySet="TypeWorkTable" />
+            <End Role="WorkTable" EntitySet="WorkTable" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="FloorsTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberFloors" />
+          </Key>
+          <Property Name="PersonalNumberFloors" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleFloors" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TrolleyTable" Relationship="DepoMaistrovaModel.FK_TrolleyTable_FloorsTable" FromRole="FloorsTable" ToRole="TrolleyTable" />
+        </EntityType>
+        <EntityType Name="ReportTable">
+          <Key>
+            <PropertyRef Name="IdReport" />
+          </Key>
+          <Property Name="IdReport" Type="Int32" Nullable="false" />
+          <Property Name="IdWork" Type="Int32" Nullable="false" />
+          <Property Name="IdTrolly" Type="Int32" Nullable="false" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="StatusWorkTable" Relationship="DepoMaistrovaModel.FK_ReportTable_StatusWorkTable" FromRole="ReportTable" ToRole="StatusWorkTable" />
+          <NavigationProperty Name="TrolleyTable" Relationship="DepoMaistrovaModel.FK_ReportTable_TrolleyTable" FromRole="ReportTable" ToRole="TrolleyTable" />
+          <NavigationProperty Name="WorkTable" Relationship="DepoMaistrovaModel.FK_ReportTable_WorkTable" FromRole="ReportTable" ToRole="WorkTable" />
+        </EntityType>
+        <EntityType Name="StatusWorkTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberStatusWork" />
+          </Key>
+          <Property Name="PersonalNumberStatusWork" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleStatusWork" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReportTable" Relationship="DepoMaistrovaModel.FK_ReportTable_StatusWorkTable" FromRole="StatusWorkTable" ToRole="ReportTable" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TrolleyTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberTrolley" />
+          </Key>
+          <Property Name="PersonalNumberTrolley" Type="Int32" Nullable="false" />
+          <Property Name="FloorsTrolley" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FloorsTable" Relationship="DepoMaistrovaModel.FK_TrolleyTable_FloorsTable" FromRole="TrolleyTable" ToRole="FloorsTable" />
+          <NavigationProperty Name="ReportTable" Relationship="DepoMaistrovaModel.FK_ReportTable_TrolleyTable" FromRole="TrolleyTable" ToRole="ReportTable" />
+        </EntityType>
+        <EntityType Name="TypeWorkTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberTypeWork" />
+          </Key>
+          <Property Name="PersonalNumberTypeWork" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleTypeWork" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WorkTable" Relationship="DepoMaistrovaModel.FK_WorkTable_TypeWorkTable1" FromRole="TypeWorkTable" ToRole="WorkTable" />
+        </EntityType>
+        <EntityType Name="WorkTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberWork" />
+          </Key>
+          <Property Name="PersonalNumberWork" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeWork" Type="Int32" Nullable="false" />
+          <Property Name="TitleWork" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReportTable" Relationship="DepoMaistrovaModel.FK_ReportTable_WorkTable" FromRole="WorkTable" ToRole="ReportTable" />
+          <NavigationProperty Name="TypeWorkTable" Relationship="DepoMaistrovaModel.FK_WorkTable_TypeWorkTable1" FromRole="WorkTable" ToRole="TypeWorkTable" />
+        </EntityType>
+        <Association Name="FK_TrolleyTable_FloorsTable">
+          <End Type="DepoMaistrovaModel.FloorsTable" Role="FloorsTable" Multiplicity="1" />
+          <End Type="DepoMaistrovaModel.TrolleyTable" Role="TrolleyTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FloorsTable">
+              <PropertyRef Name="PersonalNumberFloors" />
+            </Principal>
+            <Dependent Role="TrolleyTable">
+              <PropertyRef Name="FloorsTrolley" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_StatusWorkTable">
+          <End Type="DepoMaistrovaModel.StatusWorkTable" Role="StatusWorkTable" Multiplicity="1" />
+          <End Type="DepoMaistrovaModel.ReportTable" Role="ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusWorkTable">
+              <PropertyRef Name="PersonalNumberStatusWork" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_TrolleyTable">
+          <End Type="DepoMaistrovaModel.TrolleyTable" Role="TrolleyTable" Multiplicity="1" />
+          <End Type="DepoMaistrovaModel.ReportTable" Role="ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrolleyTable">
+              <PropertyRef Name="PersonalNumberTrolley" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="IdTrolly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_WorkTable">
+          <End Type="DepoMaistrovaModel.WorkTable" Role="WorkTable" Multiplicity="1" />
+          <End Type="DepoMaistrovaModel.ReportTable" Role="ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTable">
+              <PropertyRef Name="PersonalNumberWork" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="IdWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTable_TypeWorkTable1">
+          <End Type="DepoMaistrovaModel.TypeWorkTable" Role="TypeWorkTable" Multiplicity="1" />
+          <End Type="DepoMaistrovaModel.WorkTable" Role="WorkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeWorkTable">
+              <PropertyRef Name="PersonalNumberTypeWork" />
+            </Principal>
+            <Dependent Role="WorkTable">
+              <PropertyRef Name="TypeWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DepoMaistrovaModelContainer" CdmEntityContainer="DepoMaistrovaEntities1">
+          <EntitySetMapping Name="FloorsTable">
+            <EntityTypeMapping TypeName="DepoMaistrovaModel.FloorsTable">
+              <MappingFragment StoreEntitySet="FloorsTable">
+                <ScalarProperty Name="TitleFloors" ColumnName="TitleFloors" />
+                <ScalarProperty Name="PersonalNumberFloors" ColumnName="PersonalNumberFloors" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportTable">
+            <EntityTypeMapping TypeName="DepoMaistrovaModel.ReportTable">
+              <MappingFragment StoreEntitySet="ReportTable">
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdTrolly" ColumnName="IdTrolly" />
+                <ScalarProperty Name="IdWork" ColumnName="IdWork" />
+                <ScalarProperty Name="IdReport" ColumnName="IdReport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusWorkTable">
+            <EntityTypeMapping TypeName="DepoMaistrovaModel.StatusWorkTable">
+              <MappingFragment StoreEntitySet="StatusWorkTable">
+                <ScalarProperty Name="TitleStatusWork" ColumnName="TitleStatusWork" />
+                <ScalarProperty Name="PersonalNumberStatusWork" ColumnName="PersonalNumberStatusWork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DepoMaistrovaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrolleyTable">
+            <EntityTypeMapping TypeName="DepoMaistrovaModel.TrolleyTable">
+              <MappingFragment StoreEntitySet="TrolleyTable">
+                <ScalarProperty Name="FloorsTrolley" ColumnName="FloorsTrolley" />
+                <ScalarProperty Name="PersonalNumberTrolley" ColumnName="PersonalNumberTrolley" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeWorkTable">
+            <EntityTypeMapping TypeName="DepoMaistrovaModel.TypeWorkTable">
+              <MappingFragment StoreEntitySet="TypeWorkTable">
+                <ScalarProperty Name="TitleTypeWork" ColumnName="TitleTypeWork" />
+                <ScalarProperty Name="PersonalNumberTypeWork" ColumnName="PersonalNumberTypeWork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTable">
+            <EntityTypeMapping TypeName="DepoMaistrovaModel.WorkTable">
+              <MappingFragment StoreEntitySet="WorkTable">
+                <ScalarProperty Name="TitleWork" ColumnName="TitleWork" />
+                <ScalarProperty Name="TypeWork" ColumnName="TypeWork" />
+                <ScalarProperty Name="PersonalNumberWork" ColumnName="PersonalNumberWork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
